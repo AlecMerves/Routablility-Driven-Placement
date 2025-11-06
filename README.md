@@ -4,7 +4,7 @@ The goal of the project was to implement the Fiduccia-Mattheyses partitioning al
 
 Currently this project only implements the partitioning step of circuit automation.
 
-INSTALLATION
+### COMPILING
 If Make is available on your device:
 Just enter "make" or "make all" into the command prompt in this directory.
 
@@ -22,14 +22,14 @@ g++ -c src/node_table.cpp -o obj/node_table.o
 g++ -c src/partition.cpp -o obj/partition.o
 g++ -O3 main.cpp -o main  obj/bucket_link.o  obj/bucket_struct.o  obj/move_vector.o  obj/net.o  obj/net_table.o  obj/node.o  obj/node_table.o  obj/partition.o
 
-BENCHMARKS
+### BENCHMARKS
 To run a benchmark, place a folder with the same name as the benchmark into the ./benchmarks folder
 To run the superblue benchmarks, place each superblue# folder into the ./benchmarks folder (can be found [here](https://www.ispd.cc/contests/11/ispd2011_contest.html))
 
-USAGE
+### USAGE
 To run the program, enter ./main into the command line with the approiate flags
 
-OPTIONS
+### OPTIONS
 --super #       - Run a superblue benchmark, cannot be used with the --bench option
 --bench name    - Run a custom/other benchmark, cannot be used with the --super option
 
