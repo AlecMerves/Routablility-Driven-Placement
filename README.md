@@ -1,5 +1,8 @@
-Fidducia-Mattheyses Partitioning Algorithm with node and area constriants.
-Authors: Alec Merves & Brian Park
+# Routability-Driven Placement
+This project started as a class project for a automated electronic design course I took in the spring of the senior year at Stony Brook University.
+The goal of the project was to implement the Fiduccia-Mattheyses partitioning algorithm in C++ and use it to partition circuits from the ISPD 2011 competition. I now plan to continue this project by implementing placement and routing algorithms in my personal time.
+
+Currently this project only implements the partitioning step of circuit automation.
 
 INSTALLATION
 If Make is available on your device:
@@ -21,7 +24,7 @@ g++ -O3 main.cpp -o main  obj/bucket_link.o  obj/bucket_struct.o  obj/move_vecto
 
 BENCHMARKS
 To run a benchmark, place a folder with the same name as the benchmark into the ./benchmarks folder
-To run the superblue benchmarks, place each superblue# folder into the ./benchmarks folder
+To run the superblue benchmarks, place each superblue# folder into the ./benchmarks folder (can be found [here](https://www.ispd.cc/contests/11/ispd2011_contest.html))
 
 USAGE
 To run the program, enter ./main into the command line with the approiate flags
