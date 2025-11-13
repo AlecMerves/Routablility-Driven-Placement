@@ -5,6 +5,9 @@ The goal of the project was to implement the Fiduccia-Mattheyses partitioning al
 Currently this project only implements the partitioning step of circuit automation.
 
 ### COMPILING
+This program was written on a Windows 10 machine with the GCC compiler. The makefile uses UNIX commands from Bash.
+Maybe at a future date these will be made platform independent.
+
 If Make is available on your device:
 Just enter "make" or "make all" into the command prompt in this directory.
 
