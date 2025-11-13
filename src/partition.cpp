@@ -15,7 +15,7 @@ Partition::Partition(bool timing, bool dump, bool log, char* benchmark, int mode
     }
 
     if (this->log)
-        this->log_file.open("./partition.log", std::fstream::out | std::fstream::trunc);
+        this->log_file.open("./logs/partition.log", std::fstream::out | std::fstream::trunc);
 
     this->init_nodes();
     this->init_nets();
