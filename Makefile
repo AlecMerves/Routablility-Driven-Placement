@@ -14,3 +14,6 @@ all: build
 
 build: main.cpp $(OBJS)
 	$(CPP) $(CFLAGS) main.cpp -o main $(OBJS)
+
+clean:
+	rm ./obj/*.o
