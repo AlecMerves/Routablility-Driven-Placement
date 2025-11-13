@@ -89,8 +89,7 @@ int main(int argc, char* argv[]) {
 
     if (help)  {
         printf("\n"
-                "ESE 326 FM Partitioning Project Application\n"
-                "Authors: Alec Merves & Brian Park\n"
+                "Circuit Partitioning Application\n"
                 "Usage: ./main.exe [OPTIONS] [--super OR --bench] BENCHMARK [MODE]\n"
                 "Performs the Fiduccia-Mattheyses partitioning algorithm on the supplied benchmark\n\n"
 
