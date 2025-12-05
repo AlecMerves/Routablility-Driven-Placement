@@ -203,7 +203,7 @@ void Partition::init_bucket() {
 }
 
 void Partition::init_move_vector() {
-    printf("\nInitialiing move vector...\n");
+    printf("\nInitializing move vector...\n");
     if (this->log)
         this->log_file << "Intitializing move vector...\n" << std::endl;
     this->move_vector = new MoveVector(this->nodes->get_size());
@@ -248,11 +248,12 @@ void Partition::run() {
 
     int pass_count = 0;
     int prev_cut = -1;
-    while ((prev_cut == -1 || prev_cut > this->cut_size) && pass_count < MAX_PASSES) {
+    bool failed = false;
+    while ((prev_cut == -1 || prev_cut > this->cut_size) && pass_count < MAX_PASSES && !failed) {
         int node_count = 0;
         prev_cut = this->cut_size;
         printf("FM pass %d...\n", pass_count);
-        while (this->nodes->get_lock() != this->nodes->get_size()) {
+        while (this->nodes->get_lock() != this->nodes->get_size() && !failed) {
             if (this->log) {
                 this->log_file << "FM Pass " << pass_count <<  " - " << node_count << std::endl;
                 this->nodes->print(this->log_file, false, false, false, false, true); // print lock
@@ -267,11 +268,15 @@ void Partition::run() {
                 base_cell = this->bucket->get_max_size(this->p1_size, this->p2_size, this->max_size);
             else if (this->mode == MODE_AREA)
                 base_cell = this->bucket->get_max_area(this->p1_area, this->p2_area, this->max_area);
-            if (!base_cell) { // If a cell is repeated, then break (cant meet constraint)
+            
+            if (!base_cell) { // If a no cell is found, then break (cant meet constraint)
+                printf("No cell found that meets constraints\n");
                 if (this->log)
-                    this->log_file << "Cell " << base_cell->get_name() << " repeated, ending pass" << std::endl;
+                    this->log_file << "No cell found that meets the constraints\n" << std::endl;
+                failed = true;
                 break;
             }
+
             if (this->log) {
                 this->log_file << "Max gain found..." << std::endl;
                 base_cell->print(this->log_file, false, false, true, true, false);
@@ -329,8 +334,13 @@ void Partition::run() {
                         << "Resetting to min cut..." << std::endl;
         }
 
-
         printf("Pass %d finished\n", pass_count);
+
+        if (failed) {
+            printf("Pass failed, couldn't find a valid node to move\n");
+            break;
+        }
+
         //this->print_time();
         printf("Last cut: %d\n", prev_cut);
         printf("Best cut: %d\n", this->move_vector->get_min_cut());
@@ -348,7 +358,7 @@ void Partition::run() {
         pass_count++;
     }
 
-    printf("Partitioning complete\n");
+    printf("\nPartitioning complete\n");
     printf("Took %d passes\n", pass_count);
     printf("Cut Size: %d\n", this->cut_size);
     switch(this->mode) {
@@ -366,9 +376,9 @@ void Partition::run() {
             break;
     }
     if (this->log) {
-        this->log_file << "Partitioning complete" << std::endl;
-        nodes->print(this->log_file, false, false, true, false, false);
-        bucket->print(this->log_file);
+        this->log_file << std::endl << "Partitioning complete" << std::endl;
+        this->nodes->print(this->log_file, false, false, true, false, false);
+        this->bucket->print(this->log_file);
         this->log_file << "Cut Size: " << this->cut_size << std::endl;
     }
     this->print_time();
