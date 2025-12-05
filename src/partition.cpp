@@ -14,8 +14,12 @@ Partition::Partition(bool timing, bool dump, bool log, char* benchmark, int mode
         this->prev_time = this->start_time;
     }
 
-    if (this->log)
+    if (this->log) {
+        std::time_t start_time = std::time(nullptr);
         this->log_file.open("./logs/partition.log", std::fstream::out | std::fstream::trunc);
+        this->log_file << "Partition Algorithm Log" << std::endl;
+        this->log_file << "Time: " << std::ctime(&start_time) << std::endl;
+    }
 
     this->init_nodes();
     this->init_nets();
