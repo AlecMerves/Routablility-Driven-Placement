@@ -125,9 +125,10 @@ void NodeTable::init_partitions() {
     std::srand(std::time({}));
     for (int i = 0; i < this->size; i++) {
         Node* current = this->table[i];
-        //int p = (i % 2 == 0) ? P1 : P2;                       // Initial partitions alternate with nodes
-        //int p = (current->get_name()[0] == 'o') ? P1 : P2;    // Initial partitions follow node name
-        int p = (std::rand() % 2 == 0) ? P1 : P2;               // Initial partitions random
+        // int p = (i % 2 == 0) ? P1 : P2;                       // Initial partitions alternate with nodes
+        // int p = (current->get_name()[0] == 'o') ? P1 : P2;    // Initial partitions follow node name
+        int p = (std::rand() % 2 == 0) ? P1 : P2;             // Initial partitions random
+        // int p = (i < 10) ? P1 : P2;                             // Force imbalanced partitions
         current->set_partition(p);
     }
 }
