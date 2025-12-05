@@ -17,3 +17,4 @@ build: main.cpp $(OBJS)
 
 clean:
 	rm ./obj/*.o
+	rm ./logs/*.log
