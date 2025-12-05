@@ -23,7 +23,7 @@ class NodeTable {
 
     public:
 
-        NodeTable(int size=1); // Constructor
+        NodeTable(int size=1);
         ~NodeTable();
 
         void print(std::fstream& file, bool dim=false, bool net=false, bool partition=false, bool gain=false, bool lock=false);
